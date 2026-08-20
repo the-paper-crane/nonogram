@@ -2,7 +2,7 @@
 import tkinter as tk
 import customtkinter as ctk
 
-
+ctk.set_appearance_mode("dark")
 
 #
 class Window(ctk.CTk, tk.Tk):
