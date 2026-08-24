@@ -51,8 +51,9 @@ class Box(ctk.CTkButton):
         # place in grid format
         super().grid(row = self.row, column = self.column)
 
-    #
+    # toggle between Box states (select)
     def switch(self):
+        # colour map to states in format: {'BOX':['HOVER'], ...}
         box_colour_map = {'#d6d6d6': ['#c2c2c2'], '#424242': ['#525252']}
         box_colours = list(box_colour_map)
         if self.box_colour == box_colours[0]:
@@ -61,26 +62,35 @@ class Box(ctk.CTkButton):
         else:
             set_box_colour = box_colours[0]
             set_hover_colour = box_colour_map[set_box_colour][0]
+        # configure instance's colour attributes
         self.box_colour = set_box_colour
         self.configure(fg_color = set_box_colour, hover_color = set_hover_colour)
 
-#
+
+# template to create a ctk Frame for a grid of Boxes
 class Grid(ctk.CTkFrame):
     def __init__(self, master, width, height, radius, place_x, place_y, colour):
 
+        # attributes
+        # parent object
         self.master = master
 
-        # properties
+        # geometric properties
         self.frame_width = width
         self.frame_height = height
         self.c_radius = radius
+
+        # colours
         self.back_colour = colour
 
+        # placement
         self.x = place_x
         self.y = place_y
 
+        # instantiate the ctk frame object
         super().__init__(master, width = self.frame_width, height = self.frame_height, 
         fg_color = self.back_colour)
+        # place in window using x, y coordinates
         super().place(x = self.x, y = self.y)
 
 
