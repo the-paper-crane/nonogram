@@ -49,7 +49,6 @@ class Box(ctk.CTkButton):
     def switch(self):
         box_colour_map = {'#d6d6d6': ['#c2c2c2'], '#424242': ['#525252']}
         box_colours = list(box_colour_map)
-        print(box_colours)
         if self.box_colour == box_colours[0]:
             set_box_colour = box_colours[1]
             set_hover_colour = box_colour_map[set_box_colour][0]
