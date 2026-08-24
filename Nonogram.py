@@ -4,12 +4,12 @@ import customtkinter as ctk
 
 ctk.set_appearance_mode("dark")
 
-#
+# template to create a ctk window
 class Window(ctk.CTk, tk.Tk):
     def __init__(self, width, height):
         super().__init__()
 
-        # scale
+        # scale attributes
         self.geo_width = width
         self.geo_height = height
 
@@ -23,26 +23,32 @@ class Window(ctk.CTk, tk.Tk):
         self.wm_iconphoto(False, icon_path)
 
 
-#
+# template to create a ctk button
 class Box(ctk.CTkButton):
     def __init__(self, width, height, r, c):
 
+        # attributes
+        # geometry
         self.box_width = width
         self.box_height = height
 
+        # grid positioning
         self.row = r
         self.column = c
-
+        # grid style
         self.grid_space = 2
         self.border_colour = '#303030'
 
+        # colours
         self.box_colour = '#d6d6d6'
         self.back_colour = '#303030'
         self.hover = '#c2c2c2'
 
+        # instantiate a Box using ctk button super class
         super().__init__(grid, width = self.box_width, height = self.box_height, text = '',
         fg_color = self.box_colour, bg_color = self.back_colour, hover_color = self.hover, 
         border_width = self.grid_space, border_color = self.border_colour, command = self.switch)
+        # place in grid format
         super().grid(row = self.row, column = self.column)
 
     #
