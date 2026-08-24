@@ -42,9 +42,22 @@ class Box(ctk.CTkButton):
 
         super().__init__(grid, width = self.box_width, height = self.box_height, text = '',
         fg_color = self.box_colour, bg_color = self.back_colour, hover_color = self.hover, 
-        border_width = self.grid_space, border_color = self.border_colour)
+        border_width = self.grid_space, border_color = self.border_colour, command = self.switch)
         super().grid(row = self.row, column = self.column)
 
+    #
+    def switch(self):
+        box_colour_map = {'#d6d6d6': ['#c2c2c2'], '#424242': ['#525252']}
+        box_colours = list(box_colour_map)
+        print(box_colours)
+        if self.box_colour == box_colours[0]:
+            set_box_colour = box_colours[1]
+            set_hover_colour = box_colour_map[set_box_colour][0]
+        else:
+            set_box_colour = box_colours[0]
+            set_hover_colour = box_colour_map[set_box_colour][0]
+        self.box_colour = set_box_colour
+        self.configure(fg_color = set_box_colour, hover_color = set_hover_colour)
 
 #
 class Grid(ctk.CTkFrame):
