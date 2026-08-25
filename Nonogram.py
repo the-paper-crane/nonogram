@@ -67,6 +67,18 @@ class Box(ctk.CTkButton):
         self.configure(fg_color = set_box_colour, hover_color = set_hover_colour)
 
 
+# 
+class Set():
+    def __init__(self, scale):
+        
+        self.scale = scale
+    
+    def place_set(self):
+        for r in range(self.scale):
+            for c in range(self.scale):
+                box = Box(60, 60, r, c)
+
+
 # template to create a ctk Frame for a grid of Boxes
 class Grid(ctk.CTkFrame):
     def __init__(self, master, width, height, radius, place_x, place_y, colour):
@@ -97,19 +109,8 @@ class Grid(ctk.CTkFrame):
 window = Window(600, 600)
 grid = Grid(window, 540, 540, 2, 10, 10, '#ffffff')
 
-box = Box(60, 60, 0, 0)
-box2 = Box(60, 60, 0, 1)
-box3 = Box(60, 60, 1, 0)
-box4 = Box(60, 60, 1, 1)
-box5 = Box(60, 60, 2, 0)
-box6 = Box(60, 60, 2, 1)
-
-box7 = Box(60, 60, 0, 2)
-box8 = Box(60, 60, 0, 3)
-box9 = Box(60, 60, 1, 2)
-box10 = Box(60, 60, 1, 3)
-box11 = Box(60, 60, 2, 2)
-box12 = Box(60, 60, 2, 3)
+set1 = Set(2)
+set1.place_set()
 
 # event loop
 window.mainloop()
