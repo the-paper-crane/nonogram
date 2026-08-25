@@ -67,15 +67,20 @@ class Box(ctk.CTkButton):
         self.configure(fg_color = set_box_colour, hover_color = set_hover_colour)
 
 
-# 
+# template to create a grid of Boxes
 class Set():
     def __init__(self, scale):
         
+        # attributes
+        # define a set
         self.set_list = []
-
+        
+        # scale property
         self.scale = scale
+        # call place set method to display
         self.place_set()
     
+    # creates the set to input scale
     def place_set(self):
         for r in range(self.scale):
             contents = []
@@ -84,6 +89,7 @@ class Set():
                 contents.append(box)
             self.set_list.append(contents)
 
+    # prints list of set objects into terminal
     def print_set(self):
         print(self.set_list)
 
