@@ -71,12 +71,21 @@ class Box(ctk.CTkButton):
 class Set():
     def __init__(self, scale):
         
+        self.set_list = []
+
         self.scale = scale
+        self.place_set()
     
     def place_set(self):
         for r in range(self.scale):
+            contents = []
             for c in range(self.scale):
                 box = Box(60, 60, r, c)
+                contents.append(box)
+            self.set_list.append(contents)
+
+    def print_set(self):
+        print(self.set_list)
 
 
 # template to create a ctk Frame for a grid of Boxes
@@ -107,10 +116,10 @@ class Grid(ctk.CTkFrame):
 
 
 window = Window(600, 600)
-grid = Grid(window, 540, 540, 2, 10, 10, '#ffffff')
+grid = Grid(window, 540, 540, 2, 85, 85, '#ffffff')
 
 set1 = Set(2)
-set1.place_set()
+set1.print_set()
 
 # event loop
 window.mainloop()
