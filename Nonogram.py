@@ -36,7 +36,7 @@ class Box(ctk.CTkButton):
         self.row = r
         self.column = c
         # grid style
-        self.grid_space = 2
+        self.grid_space = 0
         self.border_colour = '#303030'
 
         # colours
@@ -46,8 +46,9 @@ class Box(ctk.CTkButton):
 
         # instantiate a Box using ctk button super class
         super().__init__(grid, width = self.box_width, height = self.box_height, text = '',
-        fg_color = self.box_colour, bg_color = self.back_colour, hover_color = self.hover, 
-        border_width = self.grid_space, border_color = self.border_colour, command = self.switch)
+        corner_radius = 0, fg_color = self.box_colour, bg_color = self.back_colour, 
+        hover_color = self.hover, border_width = self.grid_space, 
+        border_color = self.border_colour, command = self.switch)
         # place in grid format
         super().grid(row = self.row, column = self.column)
 
@@ -125,7 +126,6 @@ window = Window(600, 600)
 grid = Grid(window, 540, 540, 2, 85, 85, '#ffffff')
 
 set1 = Set(2)
-set1.print_set()
 
 # event loop
 window.mainloop()
