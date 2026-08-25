@@ -122,7 +122,7 @@ class Grid(ctk.CTkFrame):
         super().place(x = self.x, y = self.y)
 
 
-#
+# template to create a ctk Label for corresponding box patterns
 class Label(ctk.CTkLabel):
     def __init__(self, width, height, r, c):
         
@@ -145,6 +145,8 @@ class Label(ctk.CTkLabel):
         # place in grid format
         super().grid(row = self.row, column = self.column)
 
+
+#
 
 window = Window(600, 600)
 grid = Grid(window, 540, 540, 2, 85, 85, '#212121')
