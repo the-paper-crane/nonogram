@@ -81,7 +81,7 @@ class Set():
         # call place set method to display
         self.place_set()
     
-    # creates the set to input scale
+    # creates the set to reflect input scale
     def place_set(self):
         for r in range(self.scale):
             contents = []
@@ -141,18 +141,39 @@ class Label(ctk.CTkLabel):
         self.label_colour = '#ffffff'
 
         # instantiate a Label using ctk label super class
-        super().__init__(grid, width = self.label_width, height = self.label_height, text = '1 2 1')
+        super().__init__(grid, width = self.label_width, height = self.label_height, text = '')
         # place in grid format
         super().grid(row = self.row, column = self.column)
 
 
-#
+# template to create all labels for a corresponding set
+class Labels():
+    def __init__(self, scale):
+
+        # attributes
+
+        #
+        self.scale = scale
+        #
+        self.place_labels()
+
+    # create a range of labels to go beside each row and column
+    def place_labels(self):
+        for r in range(self.scale):
+            label = Label(60, 60, r, self.scale)
+            label.configure(text = ' 1  2  1 ')
+        for c in range(self.scale):
+            label = Label(60, 60, self.scale, c)
+            label.configure(text = ' 1 \n 2 \n 1')
+
 
 window = Window(600, 600)
 grid = Grid(window, 540, 540, 2, 85, 85, '#212121')
 
-set1 = Set(6)
-r1_label = Label(60, 60, 0, 6)
+SCALE = 2
+
+set1 = Set(SCALE)
+labels = Labels(SCALE)
 
 # event loop
 window.mainloop()
