@@ -122,10 +122,35 @@ class Grid(ctk.CTkFrame):
         super().place(x = self.x, y = self.y)
 
 
-window = Window(600, 600)
-grid = Grid(window, 540, 540, 2, 85, 85, '#ffffff')
+#
+class Label(ctk.CTkLabel):
+    def __init__(self, width, height, r, c):
+        
+        # attributes
+        # geometry
+        self.label_width = width
+        self.label_height = height
 
-set1 = Set(2)
+        # grid style
+
+        # grid positioning
+        self.row = r
+        self.column = c
+
+        # label style properties
+        self.label_colour = '#ffffff'
+
+        # instantiate a Label using ctk label super class
+        super().__init__(grid, width = self.label_width, height = self.label_height, text = '1 2 1')
+        # place in grid format
+        super().grid(row = self.row, column = self.column)
+
+
+window = Window(600, 600)
+grid = Grid(window, 540, 540, 2, 85, 85, '#212121')
+
+set1 = Set(6)
+r1_label = Label(60, 60, 0, 6)
 
 # event loop
 window.mainloop()
