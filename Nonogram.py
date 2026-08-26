@@ -16,7 +16,7 @@ class Window(ctk.CTk, tk.Tk):
         self.geometry(f"{self.geo_width}x{self.geo_height}")
 
         # switch / set icon
-        self.set_icon(tk.PhotoImage(file = "/home/crane/Pictures/BoxIcon.png"))
+        self.set_icon(tk.PhotoImage(file = "/home/crane/Pictures/Google Icons/BoxIcon.png"))
         self.title("Nonogram")
 
     def set_icon(self, icon_path):
@@ -148,13 +148,14 @@ class Label(ctk.CTkLabel):
 
 # template to create all labels for a corresponding set
 class Labels():
-    def __init__(self, scale):
+    def __init__(self, set_solution):
 
         # attributes
         #
-
+        self.row_reference = convert_to_labels(set_solution)
+        self.column_reference = convert_to_labels(list(zip(*set_solution)))
         #
-        self.scale = scale
+        self.scale = len(set_solution[0])
         #
         self.place_labels()
 
@@ -162,26 +163,35 @@ class Labels():
     def place_labels(self):
         for r in range(self.scale):
             label = Label(60, 60, r, self.scale)
-            label.configure(text = '')
+            label.configure(text = self.row_reference[r])
         for c in range(self.scale):
             label = Label(60, 60, self.scale, c)
-            label.configure(text = '')
+            label.configure(text = self.column_reference[c])
 
 
 # a function to take a Set in bitmap form to convert into labels
-def convert_to_labels(set, scale):
+def convert_to_labels(set_data):
+    scale = len(set_data[0])
     contents = []
-    # iterate into ...
+    #
     for r in range(scale):
         row = []
         count = 0
         for c in range(scale):
-            count += set[r][c]
-            if (set[r][c] != 1 or c == scale - 1) and count > 0:
+            count += set_data[r][c]
+            if (set_data[r][c] != 1 or c == scale - 1) and count > 0:
                 row.append(count)
                 count = 0
         contents.append(row)
     return contents
+
+
+#
+def format_labels(n_list, separator):
+    # convert the list integers to strings
+    s_list = [str(n) for n in n_list]
+    # output a formatted string using variable separator
+    return separator.join(s_list)
 
 '''
 #
@@ -199,10 +209,8 @@ solution1 = [[0, 1, 0, 1],
              [1, 0, 1, 0],
              [0, 0, 0, 0]]
 
-SCALE = 2
-
-set1 = Set(SCALE)
-labels = Labels(SCALE)
+set1 = Set(4)
+labels = Labels(solution1)
 
 
 # event loop
