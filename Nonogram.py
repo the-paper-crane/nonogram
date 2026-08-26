@@ -151,6 +151,7 @@ class Labels():
     def __init__(self, scale):
 
         # attributes
+        #
 
         #
         self.scale = scale
@@ -161,34 +162,48 @@ class Labels():
     def place_labels(self):
         for r in range(self.scale):
             label = Label(60, 60, r, self.scale)
-            label.configure(text = ' 1  2  1 ')
+            label.configure(text = '')
         for c in range(self.scale):
             label = Label(60, 60, self.scale, c)
-            label.configure(text = ' 1 \n 2 \n 1')
+            label.configure(text = '')
 
 
-# 
+# a function to take a Set in bitmap form to convert into labels
 def convert_to_labels(set, scale):
     contents = []
+    # iterate into ...
     for r in range(scale):
         row = []
         count = 0
         for c in range(scale):
             count += set[r][c]
-            if set[r][c] != 1 and count > 0:
+            if (set[r][c] != 1 or c == scale - 1) and count > 0:
                 row.append(count)
                 count = 0
         contents.append(row)
     return contents
 
+'''
+#
+def convert_to_bitmap(set_object):
+    print()
+'''
 
 window = Window(600, 600)
 grid = Grid(window, 540, 540, 2, 85, 85, '#212121')
+
+# solutions
+
+solution1 = [[0, 1, 0, 1],
+             [1, 1, 0, 1],
+             [1, 0, 1, 0],
+             [0, 0, 0, 0]]
 
 SCALE = 2
 
 set1 = Set(SCALE)
 labels = Labels(SCALE)
+
 
 # event loop
 window.mainloop()
