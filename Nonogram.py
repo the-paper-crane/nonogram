@@ -68,7 +68,10 @@ class Box(ctk.CTkButton):
             set_hover_colour = box_colour_map[set_box_colour][0]
         # configure instance's colour attributes
         self.box_colour = set_box_colour
-        self.is_flipped = 1
+        if self.is_flipped == 0:
+            self.is_flipped = 1
+        else:
+            self.is_flipped = 0
         self.configure(fg_color = set_box_colour, hover_color = set_hover_colour)
 
 
@@ -131,8 +134,11 @@ class Submit(ctk.CTkButton):
 
     # 
     def set_check(self):
-        print(convert_to_bitmap(self.display_set))
-        
+        if convert_to_bitmap(self.display_set) == self.display_set.output_set_info()['Solution']:
+            print('+')
+        else:
+            print('-')
+
 
 # template to create a ctk Frame for a grid of Boxes
 class Grid(ctk.CTkFrame):
