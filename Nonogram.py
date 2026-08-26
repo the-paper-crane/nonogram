@@ -33,7 +33,7 @@ class Box(ctk.CTkButton):
         self.box_height = height
 
         # state
-        self.is_flipped = False
+        self.is_flipped = 0
 
         # grid positioning
         self.row = r
@@ -68,7 +68,7 @@ class Box(ctk.CTkButton):
             set_hover_colour = box_colour_map[set_box_colour][0]
         # configure instance's colour attributes
         self.box_colour = set_box_colour
-        self.is_flipped = True
+        self.is_flipped = 1
         self.configure(fg_color = set_box_colour, hover_color = set_hover_colour)
 
 
@@ -129,6 +129,10 @@ class Submit(ctk.CTkButton):
         # place using fixed coordinates
         super().place(x = 425, y = 85)        
 
+    # 
+    def set_check(self):
+        print(convert_to_bitmap(self.display_set))
+        
 
 # template to create a ctk Frame for a grid of Boxes
 class Grid(ctk.CTkFrame):
@@ -228,11 +232,17 @@ def format_labels(n_list, separator):
     # output a formatted string using variable separator
     return separator.join(s_list)
 
-'''
-#
+
+# a function to convert a set object to a matrix of bits
 def convert_to_bitmap(set_object):
-    print()
-'''
+    bits = []
+    for box_list in set_object.set_list:
+        local_bits = []
+        for box in box_list:
+            local_bits.append(box.is_flipped)
+        bits.append(local_bits)
+    return bits
+
 
 window = Window(600, 600)
 grid = Grid(window, 540, 540, 2, 85, 85, '#212121')
@@ -244,7 +254,7 @@ solution1 = [[0, 1, 0, 1],
              [1, 0, 1, 0],
              [0, 1, 0, 0]]
 
-set1 = Set(4)
+set1 = Set(4, solution1)
 labels = Labels(solution1)
 
 submit_button = Submit(window, '', set1)
