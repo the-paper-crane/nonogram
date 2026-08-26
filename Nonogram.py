@@ -163,10 +163,10 @@ class Labels():
     def place_labels(self):
         for r in range(self.scale):
             label = Label(60, 60, r, self.scale)
-            label.configure(text = self.row_reference[r])
+            label.configure(text = format_labels(self.row_reference[r], '   '))
         for c in range(self.scale):
             label = Label(60, 60, self.scale, c)
-            label.configure(text = self.column_reference[c])
+            label.configure(text = format_labels(self.column_reference[c], '\n'))
 
 
 # a function to take a Set in bitmap form to convert into labels
@@ -207,7 +207,7 @@ grid = Grid(window, 540, 540, 2, 85, 85, '#212121')
 solution1 = [[0, 1, 0, 1],
              [1, 1, 0, 1],
              [1, 0, 1, 0],
-             [0, 0, 0, 0]]
+             [0, 1, 0, 0]]
 
 set1 = Set(4)
 labels = Labels(solution1)
