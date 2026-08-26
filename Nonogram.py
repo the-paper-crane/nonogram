@@ -186,7 +186,7 @@ def convert_to_labels(set_data):
     return contents
 
 
-#
+# a function to enable vertical stacking in a label
 def format_labels(n_list, separator):
     # convert the list integers to strings
     s_list = [str(n) for n in n_list]
