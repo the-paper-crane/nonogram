@@ -95,6 +95,33 @@ class Set():
         print(self.set_list)
 
 
+#
+class Submit(ctk.CTkButton):
+    def __init__(self, parent, text, display_set):
+
+        # attributes
+        # parent widget
+        self.container = parent
+        # geometry
+        self.button_width = 60
+        self.button_height = 60
+        self.c_radius = 0
+
+        # style properties
+        self.button_colour = '#212121'
+        self.hover = '#282828'
+
+        # text
+        self.text_contents = text
+        
+        # instantiate a ctk button using the super class
+        super().__init__(window, width = self.button_width, height = self.button_height, 
+        text = self.text_contents, corner_radius = self.c_radius, fg_color = self.button_colour, 
+        hover_color = self.hover, command = '')
+        # place using fixed coordinates
+        super().place(x = 425, y = 85)        
+
+
 # template to create a ctk Frame for a grid of Boxes
 class Grid(ctk.CTkFrame):
     def __init__(self, master, width, height, radius, place_x, place_y, colour):
@@ -212,6 +239,7 @@ solution1 = [[0, 1, 0, 1],
 set1 = Set(4)
 labels = Labels(solution1)
 
+submit_button = Submit(window, '', set1)
 
 # event loop
 window.mainloop()
