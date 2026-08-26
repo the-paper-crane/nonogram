@@ -167,6 +167,21 @@ class Labels():
             label.configure(text = ' 1 \n 2 \n 1')
 
 
+# 
+def convert_to_labels(set, scale):
+    contents = []
+    for r in range(scale):
+        row = []
+        count = 0
+        for c in range(scale):
+            count += set[r][c]
+            if set[r][c] != 1 and count > 0:
+                row.append(count)
+                count = 0
+        contents.append(row)
+    return contents
+
+
 window = Window(600, 600)
 grid = Grid(window, 540, 540, 2, 85, 85, '#212121')
 
