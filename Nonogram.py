@@ -32,6 +32,9 @@ class Box(ctk.CTkButton):
         self.box_width = width
         self.box_height = height
 
+        # state
+        self.is_flipped = False
+
         # grid positioning
         self.row = r
         self.column = c
@@ -65,16 +68,18 @@ class Box(ctk.CTkButton):
             set_hover_colour = box_colour_map[set_box_colour][0]
         # configure instance's colour attributes
         self.box_colour = set_box_colour
+        self.is_flipped = True
         self.configure(fg_color = set_box_colour, hover_color = set_hover_colour)
 
 
 # template to create a grid of Boxes
 class Set():
-    def __init__(self, scale):
+    def __init__(self, scale, solution):
         
         # attributes
         # define a set
         self.set_list = []
+        self.solution = solution
         
         # scale property
         self.scale = scale
@@ -90,9 +95,9 @@ class Set():
                 contents.append(box)
             self.set_list.append(contents)
 
-    # prints list of set objects into terminal
-    def print_set(self):
-        print(self.set_list)
+    # returns a list of set objects and solution
+    def output_set_info(self):
+        return {'List': self.set_list, 'Solution': self.solution}
 
 
 #
@@ -102,6 +107,9 @@ class Submit(ctk.CTkButton):
         # attributes
         # parent widget
         self.container = parent
+
+        self.display_set = display_set
+
         # geometry
         self.button_width = 60
         self.button_height = 60
@@ -117,7 +125,7 @@ class Submit(ctk.CTkButton):
         # instantiate a ctk button using the super class
         super().__init__(window, width = self.button_width, height = self.button_height, 
         text = self.text_contents, corner_radius = self.c_radius, fg_color = self.button_colour, 
-        hover_color = self.hover, command = '')
+        hover_color = self.hover, command = self.set_check)
         # place using fixed coordinates
         super().place(x = 425, y = 85)        
 
