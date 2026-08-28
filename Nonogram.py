@@ -43,35 +43,24 @@ class Box(ctk.CTkButton):
         self.border_colour = '#303030'
 
         # colours
-        self.box_colour = '#d6d6d6'
-        self.back_colour = '#303030'
-        self.hover = '#c2c2c2'
+        # colour map to states in format: [(BOX, HOVER), ...]
+        self.box_colour_map = [('#d6d6d6', '#c2c2c2'), ('#424242', '#525252')]
+        self.start_box_colour, self.start_hover = self.box_colour_map[0]
 
         # instantiate a Box using ctk button super class
         super().__init__(grid, width = self.box_width, height = self.box_height, text = '',
-        corner_radius = 0, fg_color = self.box_colour, bg_color = self.back_colour, 
-        hover_color = self.hover, border_width = self.grid_space, 
-        border_color = self.border_colour, command = self.switch)
+        corner_radius = 0, fg_color = self.start_box_colour, hover_color = self.start_hover, 
+        border_width = self.grid_space, border_color = self.border_colour, command = self.switch)
         # place in grid format
         super().grid(row = self.row, column = self.column)
 
     # toggle between Box states (select)
     def switch(self):
-        # colour map to states in format: {'BOX':['HOVER'], ...}
-        box_colour_map = {'#d6d6d6': ['#c2c2c2'], '#424242': ['#525252']}
-        box_colours = list(box_colour_map)
-        if self.box_colour == box_colours[0]:
-            set_box_colour = box_colours[1]
-            set_hover_colour = box_colour_map[set_box_colour][0]
-        else:
-            set_box_colour = box_colours[0]
-            set_hover_colour = box_colour_map[set_box_colour][0]
+        # track the switch in attribute 'is_flipped'
+        self.is_flipped = not(self.is_flipped)
+        # selection to check Box state and set colours
+        set_box_colour, set_hover_colour = self.box_colour_map[self.is_flipped]
         # configure instance's colour attributes
-        self.box_colour = set_box_colour
-        if self.is_flipped == 0:
-            self.is_flipped = 1
-        else:
-            self.is_flipped = 0
         self.configure(fg_color = set_box_colour, hover_color = set_hover_colour)
 
 
