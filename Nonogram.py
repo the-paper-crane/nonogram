@@ -126,7 +126,7 @@ class Submit(ctk.CTkButton):
         self.text_contents = text
         
         # instantiate a ctk button using the super class
-        super().__init__(window, width = self.button_width, height = self.button_height, 
+        super().__init__(self.container, width = self.button_width, height = self.button_height, 
         text = self.text_contents, corner_radius = self.c_radius, fg_color = self.button_colour, 
         hover_color = self.hover, command = self.set_check)
         # place using fixed coordinates
@@ -257,7 +257,7 @@ grid = Grid(window, 540, 540, 2, 85, 85, '#212121')
 
 # 3 x 3
 
-solution1 = [[1, 0, 0],
+solution1 = [[1, 0, 1],
              [0, 1, 1],
              [1, 1, 0]]
 
