@@ -255,12 +255,20 @@ grid = Grid(window, 540, 540, 2, 85, 85, '#212121')
 
 # solutions
 
-solution1 = [[0, 1, 0, 1],
+# 3 x 3
+
+solution1 = [[1, 0, 0],
+             [0, 1, 1],
+             [1, 1, 0]]
+
+# 4 x 4
+
+solution2 = [[0, 1, 0, 1],
              [1, 1, 0, 1],
              [1, 0, 1, 0],
              [0, 1, 0, 0]]
 
-set1 = Set(4, solution1)
+set1 = Set(3, solution1)
 labels = Labels(solution1)
 
 submit_button = Submit(window, '', set1)
